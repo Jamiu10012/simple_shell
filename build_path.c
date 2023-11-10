@@ -29,7 +29,6 @@ int find_command(char *command, char **directories, char *buffer)
 int main(void)
 {
 	char buffer[BUFFER SIZE];
-
 	char *command
 	char **arguments;
 	char *path = getenv("PATH");
@@ -46,9 +45,7 @@ while
 	{
 	char user_input[MAX_INPUT_LENGTH];
 	printf("$ ");
-/* Read user input and length */
-	fgets(user_input, MAX_INPUT_LENGHT, stdin);
-/* Remove the newline character */	
+	fgets(user_input, MAX_INPUT_LENGHT, stdin);	
 	user_input[strcspn(user_input, "\n")] = '\0';
 	}
 if (strcmp(user_input, "exit") == 0)
