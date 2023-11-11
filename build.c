@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include "shell.h"
 
 #define MAX_COMMAND_LENGTH 1000
 /**
@@ -29,6 +25,7 @@ int main(void)
 {
 char command[MAX_COMMAND_LENGTH];
 int status;
+pid_t pid;
 
 while (1)
 {
@@ -39,7 +36,7 @@ if (strlen(command) == 0)
 continue;
 }
 
-pid_t pid = fork();
+pid = fork();
 
 if (pid == -1)
 {

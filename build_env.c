@@ -1,15 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
 
 /**
 * execute_env - Execute the env command.
 */
 void execute_env(void)
 {
-extern char **environ;
 
-for (int i = 0; environ[i] != NULL; i++)
+int i;
+for (i = 0; environ[i] != NULL; i++)
 {
 printf("%s\n", environ[i]);
 }

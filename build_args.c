@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include "shell.h"
 
 #define MAX_COMMAND_LENGTH 1000
 
@@ -24,7 +20,7 @@ command[strcspn(command, "\n")] = '\0';
  * @args: Handles and executes arguments
  */
 
-void execute_command(char **args)
+void execut_command(char **args)
 {
 pid_t pid = fork();
 if (pid == 0)
@@ -77,7 +73,7 @@ token = strtok(NULL, " ");
 args[arg_count] = NULL;
 if (arg_count > 0)
 {
-execute_command(args);
+execut_command(args);
 }
 }
 }

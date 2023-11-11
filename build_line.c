@@ -1,7 +1,4 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#include "shell.h"
 
 #define BUFFER_SIZE 1024
 

@@ -1,8 +1,4 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
 
 #define MAX_PATH_LENGTH 1024
 #define MAX_INPUT_LENGTH 1024
