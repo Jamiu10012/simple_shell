@@ -23,5 +23,8 @@ int find_command(char **directories, char *command, char *buffer);
 int execute_command(char *command_path, char **arguments);
 char *custom_getline(void);
 void execut_command(char **args);
+void parsePath(char *path, char *path_dir[]);
+void getUserInput(char user_input[]);
+void executeShell(char *path_dir[], char user_input[]);
 
 #endif

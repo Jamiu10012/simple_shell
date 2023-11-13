@@ -16,7 +16,8 @@
 
 int find_command(char **directories, char *command, char *buffer)
 {
-for (int i = 0; directories[i] != NULL; i++)
+	int i;
+for (i = 0; directories[i] != NULL; i++)
 {
 char path[MAX_PATH_LENGTH];
 strcpy(path, directories[i]);
@@ -66,6 +67,8 @@ return (0);
 */
 int main(void)
 {
+char *command;
+char cmd_path[MAX_PATH_LENGTH];
 char *path = getenv("PATH");
 char *path_dir[MAX_PATH_LENGTH / 2];
 char *token = strtok(path, ":");
@@ -86,12 +89,10 @@ user_input[strcspn(user_input, "\n")] = '\0';
 
 if (strcmp(user_input, "exit") == 0)
 break;
-
-char *command = strtok(user_input, " ");
+command = strtok(user_input, " ");
 if (command == NULL)
 continue;
 
-char cmd_path[MAX_PATH_LENGTH];
 if (find_command(path_dir, command, cmd_path) == 0)
 {
 char **arguments = (char **)malloc(MAX_INPUT_LENGTH * sizeof(char *));
