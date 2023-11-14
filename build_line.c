@@ -51,27 +51,3 @@ line = (char *)realloc(line, (line_index + 1) * sizeof(char));
 
 return (line);
 }
-
-/**
-* main - Entry point for the simple shell program.
-*
-* Return: Always returns 0.
-*/
-int main(void)
-{
-char *line;
-
-while ((line = custom_getline()) != NULL)
-{
-/* For simplicity, this example just prints the line */
-
-write(STDOUT_FILENO, "You entered: ", 13);
-write(STDOUT_FILENO, line, strlen(line));
-write(STDOUT_FILENO, "\n", 1);
-
-/* Free the memory allocated for the line */
-free(line);
-}
-
-return (0);
-}
