@@ -38,7 +38,7 @@ token = strtok(NULL, " ");
 args[arg_count] = NULL;
 if (arg_count > 0)
 {
-execute_command(args);
+execut_command(args);
 }
 }
 else
