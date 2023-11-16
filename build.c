@@ -1,15 +1,14 @@
 #include "shell.h"
-
-#define MAX_COMMAND_LENGTH 1000
+#define MAX_COMMAND_LENGTH 100
 /**
- * build_command - Function to read and execute user command
+ * command_print - Read and print out user input at entry point
  * @command: Display promt for user
  * Author: EmEch and Silent Coder
  */
 
-void build_command(char *command)
+void command_print(const char *command)
 {
-printf("simple_shell> ");
+write(1, command, strlen(command));
 fgets(command, MAX_COMMAND_LENGTH, stdin);
 command[strcspn(command, "\n")] = '\0';
 }
