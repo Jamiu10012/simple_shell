@@ -1,0 +1,201 @@
+int main(void)
+{
+char command[MAX_COMMAND_LENGTH];
+int status;
+
+while (1)
+{
+build_command(command);
+
+if (strlen(command) == 0)
+{
+continue;
+}
+
+pid_t pid = fork();
+
+if (pid == -1)
+{
+perror("fork");
+exit(EXIT_FAILURE);
+}
+
+if (pid == 0)
+{
+if (execlp(command, command, NULL) == -1)
+{
+perror("execlp");
+exit(EXIT_FAILURE);
+}
+}
+else
+{
+wait(&status);
+}
+}
+
+return (0);
+}
+
+/**
+ * main - Reads command  length and size
+ * Author: EmEch and SilentCoder
+ * Return: Always 0.
+ * Or Errno upon Failure
+ */
+
+int main(void)
+{
+char command[MAX_COMMAND_LENGTH];
+while (1)
+{
+build_command_args(command);
+if (strcmp(command, "exit") == 0)
+{
+printf("See you again!\n");
+break;
+}
+if (strlen(command) > 0)
+{
+int arg_count = 0;
+char *token = strtok(command, " ");
+char *args[MAX_COMMAND_LENGTH];
+while (token != NULL)
+{
+args[arg_count] = token;
+arg_count++;
+token = strtok(NULL, " ");
+}
+args[arg_count] = NULL;
+if (arg_count > 0)
+{
+execute_command(args);
+}
+}
+}
+return (0);
+}
+
+/**
+* main - The main function.
+*
+* Return: Always 0.
+*/
+int main(void)
+{
+char input[100]; /* Assuming a maximum input length of 100 characters */
+
+printf("Enter a command (env or mycommand): ");
+scanf("%s", input);
+
+if (strcmp(input, "env") == 0)
+{
+execute_env();
+}
+else if (strcmp(input, "mycommand") == 0)
+{
+execute_mycommand();
+}
+else
+{
+printf("Unknown command: %s\n", input);
+}
+
+return (0);
+}
+
+
+/**
+ * main - The main function for the simple shell program.
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+        char user_input[MAX_COMMAND_LENGTH];
+
+        while (1)
+        {
+                printf("Shell> ");
+                fgets(user_input, sizeof(user_input), stdin);
+                /* Remove the newline character from user input */
+                if (user_input[strlen(user_input) - 1] == '\n')
+                {
+                        user_input[strlen(user_input) - 1] = '\0';
+                }
+
+                /* Check if the command is 'exit' */
+                if (strcmp(user_input, "exit") == 0)
+                {
+                        exit_shell();
+                }
+                pid_t pid = fork();
+
+                if (pid == -1)
+                {
+                        perror("fork");
+                        exit(EXIT_FAILURE);
+                }
+                else if (pid == 0) /* Child process */
+                {
+                        char *args[] = {user_input, NULL};
+
+                        execve(user_input, args, NULL);
+
+                        /* If execve fails, print an error */
+                        perror("execve");
+                        exit(EXIT_FAILURE);
+                }
+                else /* Parent process */
+                {
+                        waitpid(pid, NULL, 0);
+                }
+        }
+        return (0);
+}
+
+/**
+* main - main function of the code
+*
+* Return: Always 0.
+*/
+int main(void)
+{
+char *path = getenv("PATH");
+char *path_dir[MAX_PATH_LENGTH / 2];
+char *token = strtok(path, ":");
+int i = 0;
+while (token != NULL)
+{
+path_dir[i++] = token;
+token = strtok(NULL, ":");
+}
+path_dir[i] = NULL;
+
+while (1)
+{
+char user_input[MAX_INPUT_LENGTH];
+printf("$ ");
+fgets(user_input, MAX_INPUT_LENGTH, stdin);
+user_input[strcspn(user_input, "\n")] = '\0';
+
+if (strcmp(user_input, "exit") == 0)
+break;
+
+char *command = strtok(user_input, " ");
+if (command == NULL)
+continue;
+
+char cmd_path[MAX_PATH_LENGTH];
+if (find_command(path_dir, command, cmd_path) == 0)
+{
+char **arguments = (char **)malloc(MAX_INPUT_LENGTH * sizeof(char *));
+execute_command(cmd_path, arguments);
+}
+else
+{
+printf("Command '%s' not found or not executable.\n", command);
+}
+}
+return (0);
+}

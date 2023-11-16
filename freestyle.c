@@ -1,26 +1,15 @@
-#include "stdio.h"
-#include "unistd.h"
+#include <stdio.h>
+#include <unistd.h>
 
 /**
-* print_freestyle - the main function freestyle
-* Return: return sucess
+* main - the main entry point of freestyle code
 *
-*/
-
-void print_freestyle(void)
-{
-printf("Hello_FreestyleWorld\n");
-}
-
-/**
-* main - main fun
-* Return: return success
-* Mounntain and silent
+* Cdoe by EmEch and SilentCoder
+* Return: Always 1. on Success or 0. on Error
 */
 
 int main(void)
 {
-printf("This is main function\n");
-print_freestyle();
-return (0);
+	write(1, "and a piece of  art in making\" - EmEch, 2015-10-19\n", 59);
+	return (1);
 }
